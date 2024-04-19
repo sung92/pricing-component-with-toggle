@@ -1,0 +1,87 @@
+@use "../abstracts/functions" as f;
+@use "../abstracts/colors";
+
+/**************************/
+/* Tweaking Text Level Styles: strike-through */
+/**************************/
+
+del,
+s {
+  text-decoration: line-through;
+}
+
+mark::before,
+mark::after,
+del::before,
+del::after,
+ins::before,
+ins::after,
+s::before,
+s::after {
+  clip-path: inset(100%);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
+s::before {
+  content: " [strike-through start] ";
+}
+s::after {
+  content: " [strike-through end] ";
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/**************************/
+/* Body */
+/**************************/
+
+body {
+  padding: f.rem(48px) f.rem(18px);
+  font-size: f.rem(15px);
+  font-family: "Montserrat", sans-serif;
+  background-image: url(./images/bg-top.svg);
+  background-repeat: no-repeat;
+  background-position: top f.rem(0px) right f.rem(-190px);
+
+  background-color: var(--color-bg);
+  height: 100%;
+
+  display: grid;
+  place-content: center;
+}
+
+/**************************/
+/* Main */
+/**************************/
+
+main {
+  max-width: f.rem(375px);
+  padding: f.rem(25px);
+  border-radius: f.rem(20px);
+}
+
+@media (width >= 61.5em) {
+  body {
+    background-image: url(./images/bg-top.svg), url(./images/bg-bottom.svg);
+    background-position: top f.rem(0px) right f.rem(-50px),
+      bottom f.rem(0px) left f.rem(0px);
+  }
+
+  main {
+  }
+}
+
+/*Only with CSS, https://codepen.io/ksycz/pen/agJpKe , checkbox + if checkbox make visible hidden cards, and hide current cards*/
